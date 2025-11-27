@@ -3,9 +3,8 @@
 ````un projet c++ utilisant SDL3 sur la simulation d'un ecosysteme virtuel intelligent````
  
 ##ARCHITECHTURE DU DEPOT
-
-ecosystem_simulator/è
 ````
+ecosystem_simulator/
 ├── include/
 │   ├── Core/
 │   │   ├── Structs.h
