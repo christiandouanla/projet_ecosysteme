@@ -1,6 +1,6 @@
 #SIMULATEUR D'ECOSYSTEME
 
-un projet c++ utilisant SDL3 sur la simulation d'un ecosysteme virtuel intelligent
+````un projet c++ utilisant SDL3 sur la simulation d'un ecosysteme virtuel intelligent````
  
 ##ARCHITECHTURE DU DEPOT
 
@@ -27,10 +27,11 @@ ecosystem_simulator/è
 ├── assets/
 │   └── 
 └── README.md
+````
 
-````PREREQUIS
+##PREREQUIS
 
-Windows (ou autre OS avec les ajustements appropriés).
+````Windows (ou autre OS avec les ajustements appropriés).
 Un compilateur C++ moderne (g++/MinGW, MSVC, clang).
 SDL3 (bibliothèques de développement : headers et libs/dll). Assurez-vous d'avoir installé les fichiers de développement de SDL3 et de connaître les chemins d'inclusion et de bibliothèque.
 ````
@@ -41,7 +42,7 @@ g++ -std=c++17 -Iinclude -o ecosystem src/*.cpp src/Core/*.cpp src/Graphics/*.cp
 ````
 ##EXECUTION
 
-.\ecosystem.exe
+````.\ecosystem.exe````
 
 ##AUTEUR:
 ````bash
