@@ -34,15 +34,13 @@ Un compilateur C++ moderne (g++/MinGW, MSVC, clang).
 SDL3 (bibliothèques de développement : headers et libs/dll). Assurez-vous d'avoir installé les fichiers de développement de SDL3 et de connaître les chemins d'inclusion et de bibliothèque.
 
 ##COMPILATION
-'''
+'''bash
 g++ -std=c++17 -Iinclude -o ecosystem src/*.cpp src/Core/*.cpp src/Graphics/*.cpp -lSDL3
-'''
 
 ##EXECUTION
 
 .\ecosystem.exe
 
 ##AUTEUR:
-'''
+'''bash
 DOUANLA NGUEYO CHRISTIAN FRANCK    25P902
-'''
