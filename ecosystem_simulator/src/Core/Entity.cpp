@@ -1,4 +1,5 @@
 #include "Core/Entity.h"
+
 #include <cmath>
 #include <iostream>
 #include <algorithm>
@@ -89,6 +90,7 @@ void Entity::Move(float deltaTime) {
     
     // 📐 Application du mouvement
     position = position + mVelocity * deltaTime * 20.0f;
+
     
     // 🔄 Consommation d'énergie due au mouvement
     mEnergy -= mVelocity.Distance(Vector2D(0, 0)) * deltaTime * 0.1f;
@@ -102,7 +104,91 @@ void Entity::Eat(float energy) {
     }
     std::cout << "🍽 " << name << " mange et gagne " << energy << " énergie" << std::endl;
 }
+void Entity::ApplyForce(Vector2D force) {
+    mVelocity = force;
+}
 
+// 🌭 CHERCHE LANOURRITURE 
+      Vector2D Entity::SeekFood(const std::vector<Food>& foodSources) const {
+   
+        if (foodSources.empty()) {
+        return Vector2D(0, 0);  // No food, no direction
+    }
+
+    Food closestFood = foodSources[0];
+    float closestDistance = closestFood.position.Distance(this->position);
+
+    for (const auto& food : foodSources) {
+        float distance = food.position.Distance(this->position);
+        if (distance < closestDistance) {
+            closestFood = food;
+            closestDistance = distance;
+        }
+    }
+
+    Vector2D direction;
+    direction.x = (closestFood.position.x - this->position.x) / closestDistance;
+    direction.y = (closestFood.position.y - this->position.y) / closestDistance;
+    return direction;
+}
+
+        //EVITER LES PREDATEURS
+        Vector2D Entity::AvoidPredators(const std::vector<Entity>& predators) const {
+    Vector2D steering(0, 0);
+    float recordDist = std::numeric_limits<float>::max();
+    Vector2D closestPredatorPos;
+
+    for (const auto& predator : predators) {
+        float d = position.Distance(predator.position);
+        if (d < recordDist && d < 200.0f) { // Vision de 200 pixels
+            recordDist = d;
+            closestPredatorPos = predator.position;
+        }
+    }
+
+    if (recordDist < std::numeric_limits<float>::max()) {
+        // Calculez la direction vers lequel l'entité doit se déplacer pour éviter le prédateur le plus proche
+       Vector2D diff;
+        diff.x = position.x - closestPredatorPos.x;
+        diff.y = position.y - closestPredatorPos.y;
+      
+        float mag = std::sqrt(diff.x * diff.x + diff.y * diff.y);
+        if (mag > 0) {
+            diff = diff * (1.0f / mag);
+        }
+
+        steering = diff * 2.0f; // Force d'évitement
+    }
+
+    return steering;
+}
+
+//RESPECTER LES LIMITES
+Vector2D Entity::StayInBounds(float worldWidth, float worldHeight) const {
+    float margin = 20.0f;     // distance avant de corriger
+    float strength = 2.0f;    // force de retour
+    Vector2D force(0, 0);
+
+    // Si trop à gauche
+    if (position.x < margin)
+        force.x = strength;
+
+    // Si trop à droite
+    if (position.x > worldWidth - margin)
+        force.x = -strength;
+
+    // Haut
+    if (position.y < margin)
+        force.y = strength;
+
+    // Bas
+    if (position.y > worldHeight - margin)
+        force.y = -strength;
+
+    return force;
+}
+
+     
 // 🔄 CONSOMMATION D'ÉNERGIE
 void Entity::ConsumeEnergy(float deltaTime) {
     float baseConsumption = 0.0f;
@@ -121,7 +207,10 @@ void Entity::ConsumeEnergy(float deltaTime) {
     
     mEnergy -= baseConsumption * deltaTime;
 }
+//methode de comportement
 
+
+    
 // 🎂 VIEILLISSEMENT
 void Entity::Age(float deltaTime) {
     mAge += static_cast<int>(deltaTime * 10.0f);  // Accéléré pour la simulation
@@ -155,6 +244,10 @@ std::unique_ptr<Entity> Entity::Reproduce() {
     
     return nullptr;
 }
+/////////////////////
+ 
+//
+
 
 // 🎲 GÉNÉRATION DE DIRECTION ALÉATOIRE
 Vector2D Entity::GenerateRandomDirection() {
@@ -202,6 +295,7 @@ void Entity::Render(SDL_Renderer* renderer) const {
             position.y - size / 2.0f - 3.0f,
             energyBarWidth,
             2.0f
+            
         };
         SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
         SDL_RenderFillRect(renderer, &energyBar);

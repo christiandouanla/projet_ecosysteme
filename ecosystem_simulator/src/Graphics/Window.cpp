@@ -72,7 +72,10 @@ void Window::Present() {
     if (mRenderer) {
         SDL_RenderPresent(mRenderer);
     }
+   
+
+}
 }
 
 } // namespace Graphics
-} // namespace Ecosystem
+ // namespace Ecosystem

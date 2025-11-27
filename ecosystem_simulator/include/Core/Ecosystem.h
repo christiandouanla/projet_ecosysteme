@@ -40,7 +40,7 @@ public:
     // ⚙️ MÉTHODES PUBLIQUES
     void Initialize(int initialHerbivores, int initialCarnivores, int initialPlants);
     void Update(float deltaTime);
-    void SpawnFood(int count);
+    void SpawnFood(int count );
     void RemoveDeadEntities();
     void HandleReproduction();
     void HandleEating();
