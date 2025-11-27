@@ -4,7 +4,8 @@ un projet c++ utilisant SDL3 sur la simulation d'un ecosysteme virtuel intellige
  
 ##ARCHITECHTURE DU DEPOT
 
-ecosystem_simulator/
+ecosystem_simulator/è
+````
 ├── include/
 │   ├── Core/
 │   │   ├── Structs.h
@@ -27,20 +28,21 @@ ecosystem_simulator/
 │   └── 
 └── README.md
 
-##PREREQUIS
+````PREREQUIS
 
 Windows (ou autre OS avec les ajustements appropriés).
 Un compilateur C++ moderne (g++/MinGW, MSVC, clang).
 SDL3 (bibliothèques de développement : headers et libs/dll). Assurez-vous d'avoir installé les fichiers de développement de SDL3 et de connaître les chemins d'inclusion et de bibliothèque.
+````
 
 ##COMPILATION
-'''bash
+````bash
 g++ -std=c++17 -Iinclude -o ecosystem src/*.cpp src/Core/*.cpp src/Graphics/*.cpp -lSDL3
-
+````
 ##EXECUTION
 
 .\ecosystem.exe
 
 ##AUTEUR:
-'''bash
+````bash
 DOUANLA NGUEYO CHRISTIAN FRANCK    25P902
