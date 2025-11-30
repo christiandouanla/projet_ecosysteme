@@ -1,6 +1,6 @@
 #SIMULATEUR D'ECOSYSTEME
 
-un projet c++ utilisant SDL3 sur la simulation d'un ecosysteme virtuel intelligent
+un projet c++ utilisant SDL3 sur la simulation d'un ecosysteme virtuel intelligent.
  
 ##ARCHITECHTURE DU DEPOT
 
